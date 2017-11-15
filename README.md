@@ -1,6 +1,53 @@
 This is an example of a Docker container to run anonymous grid-ftp in a server.
 
-### Lessons learned
+### Deploying the container
+
+Configuring the Gridftp container is through enviroment variables. The default
+configuration of running:
+~~~
+./start_server.sh
+~~~
+Will start a Gridftp sever on the IP corresponding to the hostname, port 2801.
+incoming data ports 50000-51000, mouting ./data as the /data in the
+container, and MTU 1500.
+
+To customize the configuration, set the following enviroment variables before
+running the server or in the .env fie.
+
+**Public IP**:
+IP address to which Gridftp will listen to.
+~~~
+export PUBLIC_IP=10.10.1.2
+~~~
+
+**Incoming data ports**: Requires setting three values:
+~~~
+export GLOBUS_HI_DATA_TCP_PORT=50123
+export GLOBUS_LOW_DATA_TCP_PORT=50000
+export GLOBUS_TCP_PORT_RANGE=50000,50123
+~~~
+
+**Main gridftp port**:
+~~~
+export GLOBUS_CONNECT_PORT=2801
+export GLOBUS_LOW_DATA_TCP_PORT=50000
+export GLOBUS_TCP_PORT_RANGE=50000,50123
+~~~
+
+**Location of default Host to container folder mapping**
+
+For origin in the host:
+~~~
+export GLOBUS_DATA_FOLDER_HOST="${HOME}/my_data_folder"
+~~~
+
+Location to map it in the container:
+
+~~~
+export GLOBUS_DATA_FOLDER_CONTAINER=/data
+~~~
+
+### Notes about network performance
 
 - Always specify the interface to which the server will listens to:
 Default configuration
@@ -15,8 +62,6 @@ the enviroment variable:
 ~~~
 export GLOBUS_TCP_PORT_RANGE=min,max
 ~~~
-
-
 - NAT style configurations is required: The container has a private IP. If
 grid-ftp is not informed of its public IP, it will ask clients to connect to
 its private IP instead. This is done with the configuration pragma:
