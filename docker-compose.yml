@@ -1,0 +1,18 @@
+version: '3.2'
+
+services:
+  grid-ftp:
+    build: .
+    volumes:
+      - ${GLOBUS_DATA_FOLDER_HOST}:${GLOBUS_DATA_FOLDER_CONTAINER}
+    ports:
+      - "${PUBLIC_IP}:${GLOBUS_CONNECT_PORT}:${GLOBUS_CONNECT_PORT}"
+      - "${PUBLIC_IP}:${GLOBUS_LOW_DATA_TCP_PORT}-${GLOBUS_HI_DATA_TCP_PORT}:${GLOBUS_LOW_DATA_TCP_PORT}-${GLOBUS_HI_DATA_TCP_PORT}"
+    environment:
+      - PUBLIC_IP
+      - GLOBUS_TCP_PORT_RANGE
+networks:
+  default:
+    driver: bridge
+    driver_opts:
+      com.docker.network.driver.mtu: 9000
