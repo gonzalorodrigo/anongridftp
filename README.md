@@ -47,6 +47,24 @@ Location to map it in the container:
 export GLOBUS_DATA_FOLDER_CONTAINER=/data
 ~~~
 
+**Network interface MTU**
+
+MTu of the network interface of the container can be set by exporting:
+~~~
+export MTU=9000
+~~~
+IMPORTANT: the Docker installation must be configured to accept large MTU values, 
+this is done by modifying the /etc/docker/daemon.json file, setting or adding the MTU
+property:
+~~~
+{
+  "mtu": 9000
+}
+~~~
+For more details:
+[Docker config](https://docs.docker.com/engine/userguide/networking/default_network/custom-docker0/)
+
+
 ### Notes about network performance
 
 - Always specify the interface to which the server will listens to:
