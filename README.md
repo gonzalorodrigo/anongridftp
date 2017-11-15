@@ -11,8 +11,8 @@ Will start a Gridftp sever on the IP corresponding to the hostname, port 2801.
 incoming data ports 50000-51000, mouting ./data as the /data in the
 container, and MTU 1500.
 
-To customize the configuration, set the following enviroment variables before
-running the server or in the .env fie.
+To customize the configuration, set the following variables in the environment
+or the .env file before running start_server.sh file
 
 **Public IP**:
 IP address to which Gridftp will listen to.
