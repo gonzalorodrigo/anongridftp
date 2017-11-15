@@ -15,11 +15,11 @@ RUN dpkg -i ./globus-toolkit-repo_latest_all.deb
 RUN apt update
 RUN apt -y install git perfsonar-tools globus-gridftp python-pip
 
-RUN useradd -ms /bin/bash gridftp 
+RUN useradd -ms /bin/bash gridftp
 RUN mkdir /data
 RUN chown gridftp /data
 
 ADD ./gridftp.conf /etc/gridftp.conf
-ADD ./start.sh .
+ADD ./entry_point.sh .
 
-CMD "./start.sh"
+CMD "./entry_point.sh"
