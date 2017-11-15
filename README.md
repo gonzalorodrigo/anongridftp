@@ -53,7 +53,7 @@ export GLOBUS_DATA_FOLDER_CONTAINER=/data
 Default configuration
 makes Grid-ftp to listen to 1000 ports (50000-51000), in Docker this implies
 1000 open sockets between the public interface and the docker bridge (one per
-port). If no specific network interface is specified, n*1000 sockets are open
+port). If no specific network interface is specified, n*1000 sockets are opened
 (n=number of network interfaces).
 
 - Consider reducing the grid-ftp open ports. Even for a single interface, 1000
