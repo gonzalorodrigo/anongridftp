@@ -2,7 +2,8 @@
 #
 #
 echo "Grid-ftp: Starting..."
-/etc/init.d/globus-gridftp-server start -data_interface "${PUBLIC_IP}"
+echo "data_interface $PUBLIC_IP" >> /etc/gridftp.conf
+/etc/init.d/globus-gridftp-server start
 retVal=$?
 if [ ! $? -eq 0 ]; then
     echo "Grid-ftp: Error starting, return code $retVal"
